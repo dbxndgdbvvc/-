@@ -1,0 +1,21 @@
+name: Build PRO ARSENAL 2026
+on: [push]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    - name: Install Dependencies
+      run: pip install pyinstaller
+    - name: Create Arsenal EXE
+      run: pyinstaller --onefile --windowed --name "NAD_PRO_ARSENAL_2026" main.py
+    - name: Upload EXE
+      uses: actions/upload-artifact@v3
+      with:
+        name: Arsenal_Tool_Final
+        path: dist/NAD_PRO_ARSENAL_2026.exe
